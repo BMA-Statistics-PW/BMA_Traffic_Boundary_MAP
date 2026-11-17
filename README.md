@@ -10,7 +10,6 @@
 | Layer | ไฟล์ | รายละเอียด |
 |---|---|---|
 | ทางแยกสัญญาณไฟ (สีแดง) | `data/junctions.geojson` | 580 จุด จับคู่พิกัดแล้ว |
-| จำแนกตามบริษัท/เครื่องควบคุม | `data/junctions.geojson` | สีตามผู้ผลิตอุปกรณ์ (Forth/GeTs/Adaptive/PEEK/SCAE/Siemens/TES) |
 | จุดสำรวจเวลาเดินทาง | `data/survey_junctions.geojson` | 314 จุด (พิกัดตรวจสอบแล้ว ทศนิยม=DMS) |
 | ถนนสายหลัก (เส้นทาง) | `data/road_corridors.geojson` | 51 สาย (แนวโดยประมาณจากจุดสำรวจ) |
 | ทางแยกต่างระดับ | `data/interchanges.geojson` | 31 จุด (จากไฟล์ทางแยก 2567) |
