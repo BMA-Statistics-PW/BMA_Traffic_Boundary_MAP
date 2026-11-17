@@ -10,34 +10,60 @@ DATASETS={
  "INTER":"interchanges.geojson","RAIL":"rail_stations.geojson","DRS":"district_road_stats.json"}
 
 STYLE = r"""
- :root{--ink:#1f2933;--mut:#6b7280;--line:#e5e7eb;--bg:#f8fafc;}
- *{box-sizing:border-box;} html,body{height:100%;margin:0;font-family:"Segoe UI",Tahoma,"Sarabun",sans-serif;color:var(--ink);}
- #app{display:flex;height:100vh;}
- #side{width:326px;flex:0 0 326px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;overflow-y:auto;}
- header{padding:14px 16px;background:linear-gradient(135deg,#0d3b66,#1b6ca8);color:#fff;}
- header h1{font-size:15px;margin:0 0 3px;line-height:1.3;} header p{font-size:11px;margin:0;opacity:.85;}
- .sec{padding:12px 16px;border-bottom:1px solid var(--line);}
- .sec h2{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:0 0 9px;}
- .lyr{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px;cursor:pointer;}
+ /* ธีม GOV.BKK (gov.bangkok.go.th) — สีแบรนด์เขียว กทม. · หัวข้อ Anuphan · เนื้อหา Sarabun · © Prapawadee_W. */
+ :root{
+  --gb-green:#007744;--gb-green-deep:#005c33;--gb-green-mint:#6faa8a;--gb-mint-bg:#E6F9F3;--gb-amber:#e8a447;
+  --ink:#1E293B;--mut:#566677;--line:#E5E7EB;--bg:#FFFFFF;
+  --r-card:12px;--r-btn:8px;--sp-card:16px;--sb-w:326px;
+  --font-head:'Anuphan','Sarabun',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  --font-body:'Sarabun',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;}
+ *{box-sizing:border-box;}
+ html,body{height:100%;margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg);}
+ :focus-visible{outline:3px solid var(--gb-green);outline-offset:2px;border-radius:6px;}
+ #app{display:flex;height:100vh;height:100dvh;}
+ #side{width:var(--sb-w);flex:0 0 var(--sb-w);background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;overflow-y:auto;}
+ header{padding:var(--sp-card);background:#fff;border-top:4px solid var(--gb-green);border-bottom:1px solid var(--line);}
+ header h1{font:700 17px/1.35 var(--font-head);margin:0 0 4px;color:var(--gb-green-deep);}
+ header p{font-size:13px;margin:0;color:var(--mut);}
+ .sec{padding:var(--sp-card);border-bottom:1px solid var(--line);}
+ .sec h2{display:flex;align-items:center;gap:8px;font:600 14px/1.3 var(--font-head);color:var(--gb-green-deep);margin:0 0 12px;}
+ .sec h2::before{content:'';flex:0 0 4px;height:14px;border-radius:2px;background:var(--gb-amber);}
+ .lyr{display:flex;align-items:center;gap:8px;margin:2px -8px;padding:6px 8px;min-height:36px;border-radius:var(--r-btn);font-size:14px;cursor:pointer;}
+ .lyr:hover{background:var(--gb-mint-bg);}
+ .lyr input{width:16px;height:16px;margin:0;accent-color:var(--gb-green);flex:0 0 16px;}
  .sw{width:16px;height:16px;border-radius:3px;flex:0 0 16px;border:1px solid rgba(0,0,0,.25);}
  .dot{width:13px;height:13px;border-radius:50%;flex:0 0 13px;border:1px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);}
- .dotc{width:13px;height:13px;border-radius:50%;flex:0 0 13px;background:conic-gradient(#e63946 0 25%,#2a9d8f 0 50%,#3a86ff 0 75%,#8338ec 0);border:1px solid #fff;}
  .ring{width:13px;height:13px;border-radius:50%;flex:0 0 13px;border:2.5px solid #0f766e;background:transparent;}
  .line{width:16px;height:0;flex:0 0 16px;border-top:3px solid #334155;}
  .diamond{width:11px;height:11px;flex:0 0 11px;background:#0091ea;border:1.5px solid #fff;transform:rotate(45deg);box-shadow:0 0 0 1px #0091ea;margin-left:2px;}
  .tri{width:0;height:0;flex:0 0 14px;border-left:7px solid transparent;border-right:7px solid transparent;border-top:12px solid #1565C0;}
- select{font-family:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:#fff;width:100%;}
- .legend div{display:flex;align-items:center;gap:8px;font-size:12px;margin:3px 0;}
+ select{font:inherit;font-size:14px;min-height:36px;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r-btn);background:#fff;color:var(--ink);width:100%;}
+ select:hover{border-color:var(--gb-green-mint);}
+ select:focus{border-color:var(--gb-green);box-shadow:0 0 0 3px rgba(0,119,68,.18);outline:0;}
+ .legend div{display:flex;align-items:center;gap:8px;font-size:13px;margin:4px 0;}
  .legend i{width:22px;height:12px;border-radius:2px;display:inline-block;}
- #map{flex:1;position:relative;} #loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#f8fafc;z-index:9999;font-size:14px;color:#0d3b66;}
- .note{font-size:11px;color:var(--mut);line-height:1.5;}
- .badge{display:inline-block;background:#e0f2fe;color:#0369a1;border-radius:4px;padding:1px 6px;font-size:10px;}
- .leaflet-popup-content{font-family:"Segoe UI",Tahoma,sans-serif;font-size:13px;line-height:1.5;margin:10px 12px;max-width:260px;}
- .pt{font-weight:700;font-size:14px;margin-bottom:4px;color:#0d3b66;} .pk{color:var(--mut);}
- table.pp{border-collapse:collapse;margin-top:4px;} table.pp td{padding:1px 4px;vertical-align:top;}
- .foot{padding:12px 16px;font-size:11px;color:var(--mut);margin-top:auto;}
- .stat{font-size:12px;margin:2px 0;} .stat b{color:#0d3b66;}
- #companyBox{display:none;}
+ #map{flex:1;position:relative;} #loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;z-index:9999;font:600 15px var(--font-head);color:var(--gb-green-deep);}
+ .note{font-size:12px;color:var(--mut);line-height:1.55;}
+ .badge{display:inline-block;background:var(--gb-mint-bg);color:var(--gb-green-deep);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;}
+ .leaflet-container{font-family:var(--font-body);}
+ .leaflet-popup-content-wrapper{border-radius:var(--r-card);box-shadow:0 1px 2px rgba(15,23,42,.06),0 8px 20px rgba(15,23,42,.14);}
+ .leaflet-popup-content{font-family:var(--font-body);font-size:14px;line-height:1.5;margin:12px 14px;max-width:260px;}
+ .leaflet-touch .leaflet-bar{border:1px solid var(--line);border-radius:var(--r-btn);box-shadow:0 1px 3px rgba(0,0,0,.12);}
+ .leaflet-bar a{color:var(--gb-green-deep);}
+ .leaflet-bar a:hover{background:var(--gb-mint-bg);color:var(--gb-green-deep);}
+ .pt{font:700 15px/1.35 var(--font-head);margin-bottom:4px;color:var(--gb-green-deep);} .pk{color:var(--mut);}
+ table.pp{border-collapse:collapse;margin-top:4px;} table.pp td{padding:2px 4px;vertical-align:top;}
+ .foot{padding:var(--sp-card);font-size:12px;color:var(--mut);margin-top:auto;border-top:1px solid var(--line);}
+ .stat{font-size:14px;margin:4px 0;} .stat b{color:var(--gb-green-deep);font-variant-numeric:tabular-nums;}
+ /* แยกตามอุปกรณ์ — PC ≥1200 · Tablet 768–1199 · Mobile ≤767 (เกณฑ์เดียวกับ BMA Travel Time Dashboard) */
+ @media (min-width:768px) and (max-width:1199px){:root{--sb-w:296px;}}
+ @media (max-width:767px){
+  #app{flex-direction:column;height:auto;min-height:100vh;}
+  #map{order:-1;flex:none;height:62vh;min-height:360px;}
+  #side{width:100%;flex:none;border-right:0;border-top:1px solid var(--line);overflow:visible;}
+  header h1{font-size:16px;}
+ }
+ @media (pointer:coarse){select,.lyr{min-height:44px;}}
 """
 
 BODY = r"""
@@ -47,16 +73,14 @@ BODY = r"""
  <div class="sec"><h2>ชั้นข้อมูล (Layers)</h2>
    <label class="lyr"><input type="checkbox" id="ck_zone"><span class="sw" style="background:#8ecae6;opacity:.6"></span> กลุ่มเขต 6 กลุ่ม</label>
    <label class="lyr"><input type="checkbox" id="ck_dist" checked><span class="sw" style="background:#fdae6b"></span> สำนักงานเขต 50 เขต</label>
-   <label class="lyr"><input type="checkbox" id="ck_road"><span class="line"></span> ถนนสายหลัก 51 สาย</label>
+   <label class="lyr"><input type="checkbox" id="ck_road" checked><span class="line"></span> ถนนสายหลัก 51 สาย</label>
    <label class="lyr"><input type="checkbox" id="ck_pol"><span class="sw" style="background:#5a4fcf;opacity:.55"></span> สถานีตำรวจ 89 แห่ง</label>
    <label class="lyr"><input type="checkbox" id="ck_jun" checked><span class="dot" style="background:#e10600"></span> ทางแยกสัญญาณไฟ 580 จุด (แดง)</label>
-   <label class="lyr"><input type="checkbox" id="ck_company"><span class="dotc"></span> จำแนกตามบริษัท/เครื่องควบคุม</label>
-   <label class="lyr"><input type="checkbox" id="ck_inter" checked><span class="diamond"></span> ทางแยกต่างระดับ 31 จุด (ฟ้า)</label>
-   <label class="lyr"><input type="checkbox" id="ck_rail" checked><span class="tri"></span> สถานีรถไฟฟ้า 190 (▽ ทุกสาย)</label>
+   <label class="lyr"><input type="checkbox" id="ck_inter"><span class="diamond"></span> ทางแยกต่างระดับ 31 จุด (ฟ้า)</label>
+   <label class="lyr"><input type="checkbox" id="ck_rail"><span class="tri"></span> สถานีรถไฟฟ้า 190 (▽ ทุกสาย)</label>
    <label class="lyr"><input type="checkbox" id="ck_sur"><span class="ring"></span> จุดสำรวจเวลาเดินทาง 314</label>
  </div>
- <div class="sec" id="railBox"><h2>สีสถานี = สายรถไฟฟ้า</h2><div class="legend" id="railleg"></div></div>
- <div class="sec" id="companyBox"><h2>สีจุด = บริษัท / เครื่องควบคุม</h2><div class="legend" id="companyleg"></div></div>
+ <div class="sec" id="railBox" style="display:none"><h2>สีสถานี = สายรถไฟฟ้า</h2><div class="legend" id="railleg"></div></div>
  <div class="sec"><h2>ระบายสีเขตตามข้อมูล</h2>
    <select id="chmode">
      <option value="none">— ไม่ระบายสี —</option>
@@ -90,8 +114,6 @@ BODY = r"""
 
 APP = r"""
 const RED='#e10600';
-const CTRL={'Forth':'#e63946','GeTs':'#2a9d8f','Adaptive':'#f4a261','PEEK':'#8338ec','SCAE':'#3a86ff','Siemens':'#ff006e','TES':'#606c38'};
-const ctrlColor=c=>CTRL[c]||'#8d99ae';
 const fmt=n=>(n==null?'-':Number(n).toLocaleString('en-US'));
 const RAMP=['#ffffcc','#ffeda0','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#b10026'];
 const GREENS=['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'];
@@ -99,7 +121,7 @@ const GREENS=['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b
 function init(D){
  const POLICE=D.POLICE,DIST=D.DIST,ZONE=D.ZONE,JUN=D.JUN,SUR=D.SUR,ROAD=D.ROAD,INTER=D.INTER,RAIL=D.RAIL,DRS=D.DRS;
  const lo=document.getElementById('loading'); if(lo) lo.remove();
- const map=L.map('map',{preferCanvas:true}).setView([13.75,100.52],11);
+ const map=L.map('map',{preferCanvas:true,zoomSnap:.25}).setView([13.75,100.52],11);
  const bases={
   osm:L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}),
   carto:L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:20,attribution:'© OpenStreetMap © CARTO'}),
@@ -151,11 +173,8 @@ function init(D){
 
  function junPopup(p){return `<div class="pt">แยก${p.name||''}</div><div class="pk">รหัส กทม. ${p.code||'-'}</div>
    <table class="pp"><tr><td class="pk">ถนน</td><td>${p.road_main||'-'} × ${p.road_sub||'-'}</td></tr>
-   <tr><td class="pk">บริษัท/เครื่องควบคุม</td><td><b>${p.controller||'-'}</b></td></tr>
    <tr><td class="pk">สน.</td><td>${p.police||'-'}</td></tr><tr><td class="pk">เขต</td><td>${p.district||'-'}</td></tr></table>`;}
  const junLayer=L.geoJSON(JUN,{pointToLayer:(f,ll)=>L.circleMarker(ll,{radius:5,weight:1,color:'#fff',fillColor:RED,fillOpacity:.95}),
-  onEachFeature:(f,l)=>{l.bindPopup(junPopup(f.properties));l.on('mouseover',()=>l.setStyle({radius:8}));l.on('mouseout',()=>l.setStyle({radius:5}));}});
- const companyLayer=L.geoJSON(JUN,{pointToLayer:(f,ll)=>L.circleMarker(ll,{radius:5,weight:1,color:'#fff',fillColor:ctrlColor(f.properties.controller),fillOpacity:.95}),
   onEachFeature:(f,l)=>{l.bindPopup(junPopup(f.properties));l.on('mouseover',()=>l.setStyle({radius:8}));l.on('mouseout',()=>l.setStyle({radius:5}));}});
  const surLayer=L.geoJSON(SUR,{pointToLayer:(f,ll)=>L.circleMarker(ll,{radius:6,weight:2.5,color:'#0f766e',fillColor:'#14b8a6',fillOpacity:.15}),
   onEachFeature:(f,l)=>{const p=f.properties;l.bindPopup(`<div class="pt">แยก${p.name||''}</div><div class="pk">รหัสสัญญาณไฟ ${p.signal_code||'-'} · สำรวจ ${p.n_corridors} เส้นทาง</div><table class="pp"><tr><td class="pk">เส้นทาง</td><td>${p.corridors||'-'}</td></tr></table>`);}});
@@ -184,25 +203,20 @@ function init(D){
   h+=`<div style="margin-top:5px"><i style="${tri('#9aa')}"></i>▽ สามเหลี่ยมกลับหัว = สถานีรถไฟฟ้า (ขอบเข้ม = สถานีเปลี่ยนสาย)</div>`;
   document.getElementById('railleg').innerHTML=h;})();
 
- (function(){const cnt={};JUN.features.forEach(f=>{const c=f.properties.controller||'ไม่ระบุ';cnt[c]=(cnt[c]||0)+1;});
-  let h='';Object.entries(cnt).sort((a,b)=>b[1]-a[1]).forEach(([c,n])=>{h+=`<div><i style="background:${ctrlColor(c==='ไม่ระบุ'?null:c)};border-radius:50%"></i>${c} (${n})</div>`;});
-  document.getElementById('companyleg').innerHTML=h;})();
 
  function relayer(){if(document.getElementById('ck_zone').checked)zoneLayer.bringToBack();curBase.bringToBack();
   if(document.getElementById('ck_road').checked)roadLayer.bringToFront();
   if(document.getElementById('ck_jun').checked)junLayer.bringToFront();
-  if(document.getElementById('ck_company').checked)companyLayer.bringToFront();
   if(document.getElementById('ck_sur').checked)surLayer.bringToFront();}
  function bind(ck,layer,def,cb){const el=document.getElementById(ck);if(def)layer.addTo(map);
   el.onchange=()=>{el.checked?layer.addTo(map):map.removeLayer(layer);relayer();if(cb)cb(el.checked);};}
- bind('ck_zone',zoneLayer,false);bind('ck_dist',distLayer,true);bind('ck_road',roadLayer,false);
+ bind('ck_zone',zoneLayer,false);bind('ck_dist',distLayer,true);bind('ck_road',roadLayer,true);
  bind('ck_pol',polLayer,false);bind('ck_jun',junLayer,true);
- bind('ck_company',companyLayer,false,on=>{document.getElementById('companyBox').style.display=on?'block':'none';});
- bind('ck_inter',interLayer,true);
- bind('ck_rail',railLayer,true,on=>{document.getElementById('railBox').style.display=on?'block':'none';});
+ bind('ck_inter',interLayer,false);
+ bind('ck_rail',railLayer,false,on=>{document.getElementById('railBox').style.display=on?'block':'none';});
  bind('ck_sur',surLayer,false);
- document.getElementById('railBox').style.display='block';
- junLayer.bringToFront();
+ document.getElementById('railBox').style.display='none';
+ roadLayer.bringToFront();junLayer.bringToFront();
  map.fitBounds(distLayer.getBounds(),{padding:[10,10]});
  document.getElementById('s_jun').textContent=JUN.features.length.toLocaleString();
  document.getElementById('s_inter').textContent=INTER.features.length.toLocaleString();
@@ -220,6 +234,9 @@ Promise.all(Object.values(FILES).map(u=>fetch(u).then(r=>{if(!r.ok)throw new Err
     html=f"""<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>แผนที่ทางแยกสัญญาณไฟ · ถนน · ระบบราง · ขอบเขต กทม.</title>
+<meta name="theme-color" content="#007744"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="lib/leaflet.css"/><script src="lib/leaflet.js"></script>
 <style>{STYLE}</style></head><body>{BODY}
 <script>{APP}
@@ -238,6 +255,9 @@ def build_standalone():
     html=f"""<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>แผนที่ทางแยกสัญญาณไฟ · ถนน · ระบบราง · ขอบเขต กทม. (standalone)</title>
+<meta name="theme-color" content="#007744"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>{css}</style><style>{STYLE}</style><script>{js}</script></head><body>{BODY}
 <script>{APP}
 {''.join(consts)}
